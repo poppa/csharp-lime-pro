@@ -1,9 +1,9 @@
 ﻿/**
   This module is an interface to the web services of Lundalogik's web services for Lime PRO.
   http://www.lundalogik.se
- 
+
   More info can be found at the Github repository https://github.com/poppa/c#-lime-pro.
- 
+
   Copyright: 2014 Pontus Östlund <poppanator@gmail.com>
   License:   http://opensource.org/licenses/GPL-2.0 GPL License 2
   Link:      https://github.com/poppa
@@ -141,7 +141,7 @@ namespace Lime.Xml
     /// <returns></returns>
     public static Node Exp(string type)
     {
-      return new Node("Exp", new Dictionary<string, string>() { { "type", type } });
+      return new Node("exp", new Dictionary<string, string>() { { "type", type } });
     }
 
     /// <summary>
@@ -177,10 +177,10 @@ namespace Lime.Xml
     }
 
     /// <summary>
-    /// Creates a condition node in the form of 
+    /// Creates a condition node in the form of
     /// <code>
     ///   <condition operator="=">
-    ///     <exp type="field">field</exp>  
+    ///     <exp type="field">field</exp>
     ///     <exp type="string">value</exp>
     ///   </condition>
     /// </code>
@@ -284,7 +284,7 @@ namespace Lime.Xml
     /// </summary>
     /// <param name="name"></param>
     /// <param name="attributes"></param>
-    public Node(string name, Dictionary<string, string> attributes) 
+    public Node(string name, Dictionary<string, string> attributes)
       : this(name)
     {
       Attributes = attributes;
@@ -296,7 +296,7 @@ namespace Lime.Xml
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    public Node(string name, string value) 
+    public Node(string name, string value)
       : this(name)
     {
       Value = value;
