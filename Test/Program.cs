@@ -33,8 +33,7 @@ namespace Test
         "ORDER BY descriptive, soscategory DESC\n" +
         "LIMIT  100";
 
-      Parser p = new Parser();
-      Node query = p.Parse(sql);
+      Node query = Parser.ParseSQL(sql);
       My.Write("Query: " + query.ToHumanReadableString());
     }
 
@@ -76,12 +75,12 @@ namespace Test
         "ORDER BY descriptive, soscategory DESC\n" +
         "LIMIT  0, 5";
 
-      var cli = new Ws.DataServiceClient();
+      var cli = new Ws.DataServiceClient("BasicHttpBinding_IDataService");
       string data = cli.GetXmlQueryData(Builder.SqlToXml(sql));
       Node ndata = Node.Parse(data);
 
-      foreach (Node child in ndata.Children) {
-        Console.Write("* {0}\n", child.Attributes["descriptive"]);
+      foreach (Node row in ndata.Children) {
+        Console.Write("* {0}\n", row.Attributes["descriptive"]);
       }
     }
   }

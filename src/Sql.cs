@@ -455,8 +455,7 @@ namespace Lime.Sql
     public TokType Type
     {
       get { return _type; }
-      set
-      {
+      set {
         if ((_type & TokType.NONE) == TokType.NONE)
           _type &= ~TokType.NONE;
 
