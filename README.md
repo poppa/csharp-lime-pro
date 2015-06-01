@@ -76,8 +76,8 @@ The SQL query above will result in an XML document like this:
   </conditions>
   <fields>
     <field>idsostype</field>
-    <field>descriptive</field>
-    <field sortorder="DESC" sortindex="2">soscategory</field>
+    <field sortorder="desc" sortindex="1">descriptive</field>
+    <field sortorder="desc" sortindex="2">soscategory</field>
     <field>soscategory.sosbusinessarea</field>
     <field>webcompany</field>
     <field>webperson</field>
@@ -139,4 +139,4 @@ foreach (Node row in ndata.Children) {
 }
 ```
 
-\# 2014-05-26
+\# 2014-06-01
