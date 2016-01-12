@@ -1,9 +1,9 @@
 ﻿/**
   This module is an interface to the web services of Lundalogik's web services for Lime PRO.
   http://www.lundalogik.se
- 
+
   More info can be found at the Github repository https://github.com/poppa/c#-lime-pro.
- 
+
   Copyright: 2014 Pontus Östlund <poppanator@gmail.com>
   License:   http://opensource.org/licenses/GPL-2.0 GPL License 2
   Link:      https://github.com/poppa
@@ -49,9 +49,9 @@ namespace Lime.Sql
     public static HashSet<string> Operators
     {
       get { return _operators; }
-    } 
+    }
     private static HashSet<string> _operators = new HashSet<string> {
-      "!", "=", "!=", "<", ">", ">=", "<=", 
+      "!", "=", "!=", "<", ">", ">=", "<=",
       "is", "like", "and", "or", "in", "not", "any", "all"
     };
 
@@ -74,7 +74,7 @@ namespace Lime.Sql
     {
       return _operators.Contains(op.ToLower());
     }
-  
+
     /// <summary>
     /// Parse the <paramref name="sql"/> query
     /// </summary>
@@ -264,7 +264,7 @@ namespace Lime.Sql
         if (t.IsA(Token.TokType.NONE)) {
           if (p.IsA(Token.TokType.COLUMN) || (
               p.IsA(Token.TokType.KEYWORD) &&
-              p.Lveq("select", "distinct", "count"))) 
+              p.Lveq("select", "distinct", "count")))
           {
             t.Type = Token.TokType.COLUMN;
           }
@@ -273,7 +273,7 @@ namespace Lime.Sql
           }
           else if ((p.IsA(Token.TokType.KEYWORD) && p.Lveq("where")) ||
                    (p.IsA(Token.TokType.OPERATOR) && p.Lveq("and", "or")) ||
-                   p.IsA(Token.TokType.GROUP_START)) 
+                   p.IsA(Token.TokType.GROUP_START))
           {
             t.Type = Token.TokType.PREDICATE;
           }
@@ -316,12 +316,12 @@ namespace Lime.Sql
         int start = pos;
         char c = s[pos];
         switch (c) {
-          case '\0': 
+          case '\0':
             return ret;
 
           case '\r':
             pos += 1;
-            if (s[pos] == '\n') 
+            if (s[pos] == '\n')
               pos += 1;
             continue;
 
@@ -364,7 +364,7 @@ namespace Lime.Sql
             break;
 
           /*
-          Range a..Z, 0..9 and % and :
+          Range a..Z, 0..9 and % and : and _
           */
           case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g':
           case 'h': case 'i': case 'j': case 'k': case 'l': case 'm': case 'n':
@@ -375,14 +375,14 @@ namespace Lime.Sql
           case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W':
           case 'X': case 'Y': case 'Z': case '0': case '1': case '2': case '3':
           case '4': case '5': case '6': case '7': case '8': case '9': case '%':
-          case ':':
+          case ':': case '_':
             pos += 1;
             while (true) {
               switch (s[pos]) {
                 case '\0':
                   goto innerdone;
                 /*
-                Range a..Z, 0..9 and % and '.'
+                Range a..Z, 0..9 and % and '.' and ':' and '_'
                 */
                 case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
                 case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
@@ -394,14 +394,14 @@ namespace Lime.Sql
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V':
                 case 'W': case 'X': case 'Y': case 'Z': case '0': case '1':
                 case '2': case '3': case '4': case '5': case '6': case '7':
-                case '8': case '9': case '%': case '.':
+                case '8': case '9': case '%': case '.': case ':': case '_':
                   pos += 1;
                   continue;
               }
               innerdone:
               break;
             }
-        
+
             break;
 
           default:
